@@ -1,26 +1,22 @@
-name: example
-description: Example app demonstrating app_wide_search package features
+name: quickstart_minimal
+description: Minimal example showing basic app_wide_search usage
 publish_to: "none"
-
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.8.1
-  flutter: ">=3.16.0"
+  sdk: ^3.5.0
 
 dependencies:
   flutter:
     sdk: flutter
   app_wide_search:
-    path: ../
+    path: ../../
   flutter_riverpod: ^2.6.0
-  go_router: ^16.0.0
-  hive_flutter: ^1.1.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^6.0.0
+  flutter_lints: ^5.0.0
 
 flutter:
   uses-material-design: true

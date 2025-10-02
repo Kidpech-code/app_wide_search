@@ -1,0 +1,21 @@
+name: examples_shared
+description: Shared utilities for app_wide_search examples
+version: 1.0.0
+publish_to: none
+
+environment:
+  sdk: ^3.8.1
+  flutter: ">=3.24.5"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  app_wide_search:
+    path: ../../
+  flutter_riverpod: ^2.6.0
+  faker: ^2.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
