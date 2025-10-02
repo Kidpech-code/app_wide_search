@@ -1,6 +1,6 @@
 name: app_wide_search
 description: A high-performance Flutter package for implementing app-wide search with grouped results, offline caching, and deep-link support.
-version: 0.2.0
+version: 0.1.0
 homepage: https://github.com/kidpech-code/app_wide_search
 repository: https://github.com/kidpech-code/app_wide_search
 issue_tracker: https://github.com/kidpech-code/app_wide_search/issues

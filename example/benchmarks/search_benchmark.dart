@@ -1,8 +1,10 @@
 // Microbenchmark harness for search performance
 // Run with: dart run example/benchmarks/search_benchmark.dart
 
+// ignore_for_file: avoid_print
+
 import 'dart:async';
-import '../../lib/app_wide_search.dart';
+import 'package:app_wide_search/app_wide_search.dart';
 
 void main() async {
   print('🔥 Search Performance Microbenchmarks\n');
