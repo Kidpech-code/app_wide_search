@@ -1,0 +1,46 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+
+  language:
+    strict-casts: true
+    strict-inference: true
+    strict-raw-types: true
+
+  errors:
+    # Performance-critical
+    avoid_unnecessary_containers: error
+    sized_box_for_whitespace: error
+    use_key_in_widget_constructors: error
+    prefer_const_constructors: error
+    prefer_const_constructors_in_immutables: error
+
+linter:
+  rules:
+    # PERFORMANCE
+    - avoid_unnecessary_containers
+    - sized_box_for_whitespace
+    - prefer_const_constructors
+    - prefer_const_constructors_in_immutables
+    - prefer_const_declarations
+    - prefer_const_literals_to_create_immutables
+    - prefer_final_fields
+    - prefer_final_locals
+
+    # API DESIGN
+    - public_member_api_docs
+    - hash_and_equals
+    - cancel_subscriptions
+    - close_sinks
+
+    # CODE QUALITY
+    - always_declare_return_types
+    - annotate_overrides
+    - avoid_print
+    - curly_braces_in_flow_control_structures
+    - prefer_single_quotes
+    - sort_child_properties_last
+    - unawaited_futures
