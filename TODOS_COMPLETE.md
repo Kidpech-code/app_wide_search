@@ -1,4 +1,4 @@
-# ✅ All Tasks Completed - v0.2.0 Release Summary
+# ✅ All Tasks Completed - v0.1.0 Release Summary
 
 **Date:** October 2, 2025  
 **Status:** 🎉 **ALL 10 TODOS COMPLETE**  
@@ -75,14 +75,14 @@
 
 - [x] Updated PERFORMANCE_REPORT.md
 - [x] Marked all Phase 1 & 2 optimizations complete
-- [x] Added v0.2.0 status
+- [x] Added v0.1.0 status
 - [x] Production ready metrics
 - [x] Score: A+ (9.4/10)
 
 ### ✅ 9. Documentation Enhancement (COMPLETE)
 
 - [x] Updated README.md
-- [x] Added v0.2.0 features
+- [x] Added v0.1.0 features
 - [x] Added CI badge
 - [x] Updated quick-start guide
 - [x] Added performance metrics
@@ -90,7 +90,7 @@
 
 ### ✅ 10. Version Bump & CHANGELOG (COMPLETE)
 
-- [x] Version set to 0.2.0 in pubspec.yaml
+- [x] Version set to 0.1.0 in pubspec.yaml
 - [x] CHANGELOG.md updated
 - [x] Documented go_router 16.x upgrade
 - [x] Documented new cancellation API
@@ -195,7 +195,7 @@
 
 ### Pre-Flight Checklist
 
-- [x] Version: 0.2.0
+- [x] Version: 0.1.0
 - [x] Tests: 36/36 passing
 - [x] Format: Clean
 - [x] Analyzer: Only benchmark infos (acceptable)
@@ -211,10 +211,10 @@
 ```bash
 # 1. Commit all changes
 git add .
-git commit -m "chore: Release v0.2.0 - Cancellation API + Performance + CI/CD"
+git commit -m "chore: Release v0.1.0 - Cancellation API + Performance + CI/CD"
 
 # 2. Tag release
-git tag -a v0.2.0 -m "Release v0.2.0: Cancellation API, Performance, CI/CD"
+git tag -a v0.1.0 -m "Release v0.1.0: Cancellation API, Performance, CI/CD"
 
 # 3. Push to GitHub
 git push origin main --tags
@@ -237,7 +237,7 @@ flutter pub publish
 - CI/CD: None
 - Documentation: Basic
 
-### After (v0.2.0)
+### After (v0.1.0)
 
 - Tests: 36 (+100%) ✅
 - Coverage: ~75% (+15%) ✅
@@ -253,7 +253,7 @@ flutter pub publish
 
 **ALL 10 TODOS COMPLETE!**
 
-Package `app_wide_search` v0.2.0 is:
+Package `app_wide_search` v0.1.0 is:
 
 - ✅ Production-ready
 - ✅ Well-tested (36 tests)

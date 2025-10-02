@@ -1,11 +1,11 @@
-# Release Instructions - v0.2.0
+# Release Instructions - v0.1.0
 
 ## Pre-Release Checklist ✅
 
 All items below have been verified and are READY:
 
-- [x] **Version bumped** to 0.2.0 in `pubspec.yaml`
-- [x] **CHANGELOG.md** updated with v0.2.0 release notes
+- [x] **Version bumped** to 0.1.0 in `pubspec.yaml`
+- [x] **CHANGELOG.md** updated with v0.1.0 release notes
 - [x] **All tests passing** (18/18 in 1.5s)
 - [x] **Code formatted** (22 files, 0 issues)
 - [x] **Analyzer clean** (0 errors, 0 warnings, 21 infos - benchmark only)
@@ -31,7 +31,7 @@ git status
 git add .
 
 # Commit with descriptive message
-git commit -m "chore: Release v0.2.0 - Cancellation API + dependency upgrades
+git commit -m "chore: Release v0.1.0 - Cancellation API + dependency upgrades
 
 Features:
 - Add CancellationToken API for production-safe async cancellation
@@ -52,7 +52,7 @@ Documentation:
 - Add DIFF_SUMMARY.md (550 lines)
 - Add TEST_MATRIX.md (600 lines)
 - Add FINAL_AUDIT_SUMMARY.md (600 lines)
-- Update CHANGELOG.md with v0.2.0 notes
+- Update CHANGELOG.md with v0.1.0 notes
 
 Quality:
 - All tests passing (18/18)
@@ -70,7 +70,7 @@ Status: APPROVED FOR RELEASE ✅"
 
 ```bash
 # Create annotated tag
-git tag -a v0.2.0 -m "Release v0.2.0: Cancellation API + Dependency Upgrades
+git tag -a v0.1.0 -m "Release v0.1.0: Cancellation API + Dependency Upgrades
 
 Headline Features:
 - Production-ready CancellationToken API
@@ -87,7 +87,7 @@ Grade: A- (9.1/10)
 Status: Production Ready ✅"
 
 # Verify tag was created
-git tag -l -n9 v0.2.0
+git tag -l -n9 v0.1.0
 ```
 
 ### Step 3: Push to GitHub
@@ -101,7 +101,7 @@ git push origin --tags
 
 # Verify push successful
 git log --oneline -1
-git tag -l v0.2.0
+git tag -l v0.1.0
 ```
 
 ### Step 4: Publish to pub.dev
@@ -113,7 +113,7 @@ flutter pub publish --dry-run
 # Publish for real
 flutter pub publish
 
-# When prompted "Do you want to publish app_wide_search 0.2.0 to https://pub.dev (y/N)?"
+# When prompted "Do you want to publish app_wide_search 0.1.0 to https://pub.dev (y/N)?"
 # Type: y
 # Press: Enter
 
@@ -129,7 +129,7 @@ flutter pub publish
 # Check package page
 open https://pub.dev/packages/app_wide_search
 
-# Verify version 0.2.0 is live
+# Verify version 0.1.0 is live
 # Verify documentation renders correctly
 # Verify example code is shown
 # Verify dependencies are correct
@@ -142,7 +142,7 @@ open https://pub.dev/packages/app_wide_search
 ### Step 1: git commit
 
 ```
-[main abc1234] chore: Release v0.2.0 - Cancellation API + dependency upgrades
+[main abc1234] chore: Release v0.1.0 - Cancellation API + dependency upgrades
  15 files changed, 1800 insertions(+), 50 deletions(-)
  create mode 100644 API_CHANGELOG.md
  create mode 100644 DIFF_SUMMARY.md
@@ -155,11 +155,11 @@ open https://pub.dev/packages/app_wide_search
 ### Step 2: git tag
 
 ```
-tag v0.2.0
+tag v0.1.0
 Tagger: Your Name <your.email@example.com>
 Date:   Thu Oct 2 12:00:00 2025 -0700
 
-Release v0.2.0: Cancellation API + Dependency Upgrades
+Release v0.1.0: Cancellation API + Dependency Upgrades
 ...
 ```
 
@@ -174,13 +174,13 @@ Writing objects: 100% (30/30), 50.12 KiB | 10.02 MiB/s, done.
 Total 30 (delta 20), reused 0 (delta 0), pack-reused 0
 To github.com:yourusername/app_wide_search.git
    def5678..abc1234  main -> main
- * [new tag]         v0.2.0 -> v0.2.0
+ * [new tag]         v0.1.0 -> v0.1.0
 ```
 
 ### Step 4: flutter pub publish
 
 ```
-Publishing app_wide_search 0.2.0 to https://pub.dev:
+Publishing app_wide_search 0.1.0 to https://pub.dev:
 ├── API.md
 ├── API_CHANGELOG.md
 ├── CHANGELOG.md
@@ -190,7 +190,7 @@ Publishing app_wide_search 0.2.0 to https://pub.dev:
 
 Total compressed archive size: 67 KB.
 
-Do you want to publish app_wide_search 0.2.0 to https://pub.dev (y/N)? y
+Do you want to publish app_wide_search 0.1.0 to https://pub.dev (y/N)? y
 
 Pub needs your authorization to upload packages on your behalf.
 In a web browser, go to https://accounts.google.com/o/oauth2/auth?...
@@ -212,15 +212,15 @@ Successfully uploaded package.
 
 1. Go to https://github.com/yourusername/app_wide_search/releases
 2. Click "Draft a new release"
-3. Tag: `v0.2.0`
-4. Title: `v0.2.0 - Cancellation API + Dependency Upgrades`
+3. Tag: `v0.1.0`
+4. Title: `v0.1.0 - Cancellation API + Dependency Upgrades`
 5. Description: Copy from `CHANGELOG.md` or `FINAL_AUDIT_SUMMARY.md`
 6. Click "Publish release"
 
 **Social Media (Optional):**
 
 ```
-🎉 Just released app_wide_search v0.2.0!
+🎉 Just released app_wide_search v0.1.0!
 
 ✨ New Features:
 - Production-ready CancellationToken API
@@ -238,13 +238,13 @@ Successfully uploaded package.
 
 ### 2. Update Example App (Already Done)
 
-The example app in `/example` is already configured with v0.2.0 dependencies.
+The example app in `/example` is already configured with v0.1.0 dependencies.
 
 ### 3. Monitor pub.dev
 
 Check pub.dev after 2-5 minutes:
 
-- Package version shows 0.2.0
+- Package version shows 0.1.0
 - Pub points score (should be high, 130+)
 - Documentation renders correctly
 - No errors reported
@@ -268,8 +268,8 @@ If a critical issue is discovered after publishing:
 ### Option 1: Yank the Release (Extreme)
 
 ```bash
-# Yank v0.2.0 from pub.dev (makes it unavailable for new installs)
-flutter pub unpublish app_wide_search --version 0.2.0
+# Yank v0.1.0 from pub.dev (makes it unavailable for new installs)
+flutter pub unpublish app_wide_search --version 0.1.0
 
 # Note: This requires contacting pub.dev support
 # Only use for security issues or critical bugs
@@ -311,7 +311,7 @@ flutter pub login
 # Follow OAuth flow in browser
 ```
 
-### "Publishing failed: version 0.2.0 already exists"
+### "Publishing failed: version 0.1.0 already exists"
 
 **Cause:** Version was already published (rare)  
 **Solution:** Bump to 0.2.1 and try again
@@ -343,7 +343,7 @@ git push origin main
 
 ✅ All steps completed without errors  
 ✅ Package visible on pub.dev within 5 minutes  
-✅ Version 0.2.0 shows on package page  
+✅ Version 0.1.0 shows on package page  
 ✅ Documentation renders correctly  
 ✅ Example code is visible  
 ✅ Pub points score is high (130+)  

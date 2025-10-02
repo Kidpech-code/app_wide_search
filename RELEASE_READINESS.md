@@ -1,6 +1,6 @@
 # Release Readiness Report
 
-**Package:** `app_wide_search` v0.2.0  
+**Package:** `app_wide_search` v0.1.0  
 **Date:** 2025-10-02  
 **Status:** 🟡 READY WITH RECOMMENDATIONS
 
@@ -167,7 +167,7 @@ All previous 40% performance improvements remain intact:
 
 ## Go/No-Go Decision
 
-### ✅ GO for v0.2.0 Release
+### ✅ GO for v0.1.0 Release
 
 **Justification:**
 
@@ -204,7 +204,7 @@ All previous 40% performance improvements remain intact:
 
 ## Version Recommendation
 
-### Proposed: **v0.2.0** (Minor Release)
+### Proposed: **v0.1.0** (Minor Release)
 
 **Semver Rationale:**
 
@@ -216,7 +216,7 @@ All previous 40% performance improvements remain intact:
 **Changelog Summary:**
 
 ```markdown
-## [0.2.0] - 2025-10-02
+## [0.1.0] - 2025-10-02
 
 ### Added
 
@@ -278,13 +278,13 @@ All previous 40% performance improvements remain intact:
 - [x] Backward compatibility verified
 - [x] Performance maintained
 - [x] CHANGELOG.md updated
-- [x] pubspec.yaml version bumped to 0.2.0
+- [x] pubspec.yaml version bumped to 0.1.0
 
 ### Release Steps
 
 1. ✅ Run `flutter pub publish --dry-run`
-2. ✅ Tag release: `git tag v0.2.0`
-3. ✅ Push tag: `git push origin v0.2.0`
+2. ✅ Tag release: `git tag v0.1.0`
+3. ✅ Push tag: `git push origin v0.1.0`
 4. ⏳ Publish: `flutter pub publish`
 5. ⏳ Create GitHub release with changelog
 6. ⏳ Update documentation site
@@ -315,7 +315,7 @@ All previous 40% performance improvements remain intact:
 
 ## Conclusion
 
-The `app_wide_search` package is **READY FOR v0.2.0 RELEASE** with the following highlights:
+The `app_wide_search` package is **READY FOR v0.1.0 RELEASE** with the following highlights:
 
 ✅ **Stability:** All tests pass, zero breaking changes  
 ✅ **Features:** Critical cancellation API implemented  
@@ -327,7 +327,7 @@ The `app_wide_search` package is **READY FOR v0.2.0 RELEASE** with the following
 
 **Recommended Next Steps:**
 
-1. Release v0.2.0 immediately ✅
+1. Release v0.1.0 immediately ✅
 2. Implement widget tests for v0.2.1 (patch)
 3. Add CI/CD + streaming API for v0.3.0 (minor)
 4. Consider Riverpod 3.0 migration for v0.4.0 (minor)
