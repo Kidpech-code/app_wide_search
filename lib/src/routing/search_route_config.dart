@@ -20,19 +20,34 @@ class SearchRouteConfig {
   ///
   /// This route supports deep-linking with query parameters. For example:
   /// `/search?q=flutter` will open the search screen with "flutter" pre-filled.
-  static GoRoute createSearchRoute({String? path, Widget Function(BuildContext, GoRouterState)? builder}) {
-    return GoRoute(path: path ?? searchPath, builder: builder ?? _defaultSearchBuilder);
+  static GoRoute createSearchRoute({
+    String? path,
+    Widget Function(BuildContext, GoRouterState)? builder,
+  }) {
+    return GoRoute(
+      path: path ?? searchPath,
+      builder: builder ?? _defaultSearchBuilder,
+    );
   }
 
   /// Creates a ShellRoute for search with a persistent navigation bar.
   ///
   /// This is useful for apps with bottom navigation where search should be
   /// one of the main tabs.
-  static ShellRoute createSearchShellRoute({required Widget Function(BuildContext, GoRouterState, Widget) builder, List<RouteBase>? routes}) {
-    return ShellRoute(builder: builder, routes: routes ?? [createSearchRoute()]);
+  static ShellRoute createSearchShellRoute({
+    required Widget Function(BuildContext, GoRouterState, Widget) builder,
+    List<RouteBase>? routes,
+  }) {
+    return ShellRoute(
+      builder: builder,
+      routes: routes ?? [createSearchRoute()],
+    );
   }
 
-  static Widget _defaultSearchBuilder(BuildContext context, GoRouterState state) {
+  static Widget _defaultSearchBuilder(
+    BuildContext context,
+    GoRouterState state,
+  ) {
     final query = state.uri.queryParameters[queryParam];
     return SearchScreen(initialQuery: query);
   }
@@ -52,7 +67,10 @@ class SearchRouteConfig {
   ///
   /// This is an alternative to navigating to a full search screen. It shows
   /// the search interface as an overlay.
-  static Future<SearchItem?> showSearchModal(BuildContext context, AppWideSearchDelegate delegate) {
+  static Future<SearchItem?> showSearchModal(
+    BuildContext context,
+    AppWideSearchDelegate delegate,
+  ) {
     return showSearch<SearchItem?>(context: context, delegate: delegate);
   }
 }

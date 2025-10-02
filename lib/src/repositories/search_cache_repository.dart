@@ -81,7 +81,9 @@ class SearchCacheRepository {
     final data = _box!.get(query.toLowerCase());
     if (data == null) return null;
 
-    final timestamp = DateTime.fromMillisecondsSinceEpoch(data['timestamp'] as int);
+    final timestamp = DateTime.fromMillisecondsSinceEpoch(
+      data['timestamp'] as int,
+    );
 
     // Check if cache has expired
     if (DateTime.now().difference(timestamp) > cacheDuration) {
@@ -89,7 +91,9 @@ class SearchCacheRepository {
       return null;
     }
 
-    final items = (data['items'] as List<dynamic>).map((item) => _deserializeItem(item as Map<dynamic, dynamic>)).toList();
+    final items = (data['items'] as List<dynamic>)
+        .map((item) => _deserializeItem(item as Map<dynamic, dynamic>))
+        .toList();
 
     return SearchResult(
       query: data['query'] as String,
@@ -117,7 +121,9 @@ class SearchCacheRepository {
     for (final key in _box!.keys) {
       final data = _box!.get(key);
       if (data != null) {
-        final timestamp = DateTime.fromMillisecondsSinceEpoch(data['timestamp'] as int);
+        final timestamp = DateTime.fromMillisecondsSinceEpoch(
+          data['timestamp'] as int,
+        );
         if (DateTime.now().difference(timestamp) > cacheDuration) {
           keysToDelete.add(key as String);
         }
@@ -148,14 +154,19 @@ class SearchCacheRepository {
 
     // Remove oldest 20%
     final toRemove = (entries.length * 0.2).ceil();
-    final keysToDelete = entries.take(toRemove).map((e) => e.key as String).toList();
+    final keysToDelete = entries
+        .take(toRemove)
+        .map((e) => e.key as String)
+        .toList();
 
     await _box!.deleteAll(keysToDelete);
   }
 
   void _ensureInitialized() {
     if (_box == null || !_box!.isOpen) {
-      throw StateError('SearchCacheRepository not initialized. Call initialize() first.');
+      throw StateError(
+        'SearchCacheRepository not initialized. Call initialize() first.',
+      );
     }
   }
 

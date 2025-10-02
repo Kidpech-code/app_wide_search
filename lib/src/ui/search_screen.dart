@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import '../providers/search_providers.dart';
 import '../widgets/search_result_list.dart';
 import '../l10n/search_localizations.dart';
@@ -55,7 +56,9 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
   void initState() {
     super.initState();
     _searchController = TextEditingController(text: widget.initialQuery);
-    _showClearButton = ValueNotifier<bool>(widget.initialQuery?.isNotEmpty ?? false);
+    _showClearButton = ValueNotifier<bool>(
+      widget.initialQuery?.isNotEmpty ?? false,
+    );
     if (widget.initialQuery != null) {
       // Trigger search with initial query
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -102,7 +105,6 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     final resultsAsync = ref.watch(searchResultsProvider);
-    final theme = Theme.of(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -116,7 +118,12 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
             suffixIcon: ValueListenableBuilder<bool>(
               valueListenable: _showClearButton,
               builder: (context, showClear, _) {
-                return showClear ? IconButton(icon: const Icon(Icons.clear), onPressed: _clearSearch) : const SizedBox.shrink();
+                return showClear
+                    ? IconButton(
+                        icon: const Icon(Icons.clear),
+                        onPressed: _clearSearch,
+                      )
+                    : const SizedBox.shrink();
               },
             ),
           ),
@@ -149,7 +156,8 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                 result: result,
                 onItemTap: (item) {
                   if (item.route != null) {
-                    Navigator.of(context).pushNamed(item.route!);
+                    // Use go_router's navigation
+                    context.go(item.route!);
                   } else if (item.onTap != null) {
                     item.onTap!();
                   }
@@ -157,16 +165,29 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
               );
             },
             loading: () => const Center(child: CircularProgressIndicator()),
-            error: (error, stack) => Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.error_outline, size: 64, color: theme.colorScheme.error),
-                  const SizedBox(height: 16),
-                  Text(SearchLocalizations.of(context).errorMessage(error.toString()), style: theme.textTheme.bodyLarge, textAlign: TextAlign.center),
-                ],
-              ),
-            ),
+            error: (error, stack) {
+              final theme = Theme.of(context);
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.error_outline,
+                      size: 64.0,
+                      color: theme.colorScheme.error,
+                    ),
+                    const SizedBox(height: 16.0),
+                    Text(
+                      SearchLocalizations.of(
+                        context,
+                      ).errorMessage(error.toString()),
+                      style: theme.textTheme.bodyLarge,
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              );
+            },
           ),
     );
   }
@@ -184,11 +205,14 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(SearchLocalizations.of(context).recentSearches, style: Theme.of(context).textTheme.titleLarge),
+                  Text(
+                    SearchLocalizations.of(context).recentSearches,
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
                   TextButton(
                     onPressed: () {
                       final clearHistory = ref.read(clearSearchHistoryProvider);
@@ -220,33 +244,48 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
         );
       },
       loading: () => const Center(child: CircularProgressIndicator()),
-      error: (_, __) => _buildEmptyHistory(context),
+      error: (error, stackTrace) => _buildEmptyHistory(context),
     );
   }
 
   Widget _buildEmptyHistory(BuildContext context) {
+    final theme = Theme.of(context);
+    final disabledColor = theme.disabledColor;
+
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.search, size: 64, color: Theme.of(context).disabledColor),
-          const SizedBox(height: 16),
-          Text(SearchLocalizations.of(context).startTyping, style: Theme.of(context).textTheme.bodyLarge),
+          Icon(Icons.search, size: 64.0, color: disabledColor),
+          const SizedBox(height: 16.0),
+          Text(
+            SearchLocalizations.of(context).startTyping,
+            style: theme.textTheme.bodyLarge,
+          ),
         ],
       ),
     );
   }
 
   Widget _buildEmptyState(BuildContext context) {
+    final theme = Theme.of(context);
+    final disabledColor = theme.disabledColor;
+
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.search_off, size: 64, color: Theme.of(context).disabledColor),
-          const SizedBox(height: 16),
-          Text(SearchLocalizations.of(context).noResults, style: Theme.of(context).textTheme.headlineSmall),
-          const SizedBox(height: 8),
-          Text(SearchLocalizations.of(context).tryDifferentKeywords, style: Theme.of(context).textTheme.bodyMedium),
+          Icon(Icons.search_off, size: 64.0, color: disabledColor),
+          const SizedBox(height: 16.0),
+          Text(
+            SearchLocalizations.of(context).noResults,
+            style: theme.textTheme.headlineSmall,
+          ),
+          const SizedBox(height: 8.0),
+          Text(
+            SearchLocalizations.of(context).tryDifferentKeywords,
+            style: theme.textTheme.bodyMedium,
+          ),
         ],
       ),
     );

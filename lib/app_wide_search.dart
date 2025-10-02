@@ -58,6 +58,7 @@ export 'src/models/search_group.dart';
 export 'src/models/search_result.dart';
 export 'src/models/search_provider.dart';
 export 'src/models/search_history_item.dart';
+export 'src/models/cancellation_token.dart';
 
 // Repositories
 export 'src/repositories/search_history_repository.dart';

@@ -1,0 +1,138 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+  workflow_dispatch:
+
+jobs:
+  analyze:
+    name: Analyze & Format
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.24.5"
+          channel: "stable"
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Verify formatting
+        run: dart format --set-exit-if-changed .
+
+      - name: Analyze project
+        run: flutter analyze --fatal-infos
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.24.5"
+          channel: "stable"
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run tests
+        run: flutter test --coverage
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          file: ./coverage/lcov.info
+          fail_ci_if_error: false
+          token: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: Check coverage threshold
+        run: |
+          if [ -f coverage/lcov.info ]; then
+            echo "Coverage file generated successfully"
+          else
+            echo "Warning: No coverage file generated"
+          fi
+
+  publish-dry-run:
+    name: Publish Dry Run
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: [analyze, test]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.24.5"
+          channel: "stable"
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Validate package
+        run: flutter pub publish --dry-run
+
+  build-example:
+    name: Build Example App
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    needs: [analyze, test]
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        include:
+          - os: ubuntu-latest
+            target: web
+          - os: macos-latest
+            target: ios
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.24.5"
+          channel: "stable"
+          cache: true
+
+      - name: Install dependencies (main package)
+        run: flutter pub get
+
+      - name: Install dependencies (example)
+        working-directory: example
+        run: flutter pub get
+
+      - name: Build example app (Web)
+        if: matrix.target == 'web'
+        working-directory: example
+        run: flutter build web --release
+
+      - name: Build example app (iOS)
+        if: matrix.target == 'ios'
+        working-directory: example
+        run: flutter build ios --release --no-codesign

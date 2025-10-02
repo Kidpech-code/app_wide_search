@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'search_item.dart';
 import 'search_result.dart';
+import 'cancellation_token.dart';
 
 /// Contract for implementing custom search backends.
 ///
@@ -15,9 +16,19 @@ abstract class SearchProvider {
   /// optional [limit] parameter controls the maximum number of results to
   /// return. The [offset] parameter enables pagination.
   ///
+  /// The [cancellationToken] parameter allows cancelling long-running searches
+  /// when the user types a new query. This prevents memory leaks and race
+  /// conditions. If cancelled, implementations should return an empty result
+  /// or throw [CancelledException].
+  ///
   /// This method is called when the user submits a search query. It should
   /// perform the actual search logic and return matching items.
-  Future<SearchResult> search(String query, {int limit = 20, int offset = 0});
+  Future<SearchResult> search(
+    String query, {
+    int limit = 20,
+    int offset = 0,
+    CancellationToken? cancellationToken,
+  });
 
   /// Provides search suggestions based on partial input.
   ///
@@ -83,22 +94,34 @@ class InMemorySearchProvider extends SearchProvider {
   final List<_IndexedSearchItem> _indexed;
 
   @override
-  Future<SearchResult> search(String query, {int limit = 20, int offset = 0}) async {
+  Future<SearchResult> search(
+    String query, {
+    int limit = 20,
+    int offset = 0,
+    CancellationToken? cancellationToken,
+  }) async {
     final stopwatch = Stopwatch()..start();
 
     if (query.isEmpty) {
       return SearchResult.empty(query);
     }
 
+    // Check cancellation before starting expensive operation
+    cancellationToken?.throwIfCancelled();
+
     final normalizedQuery = query.toLowerCase();
     final matches = _indexed
         .where((indexed) {
           return indexed.normalizedTitle.contains(normalizedQuery) ||
               indexed.normalizedSubtitle.contains(normalizedQuery) ||
-              (indexed.normalizedDescription?.contains(normalizedQuery) ?? false);
+              (indexed.normalizedDescription?.contains(normalizedQuery) ??
+                  false);
         })
         .map((e) => e.item)
         .toList();
+
+    // Check cancellation after search but before pagination
+    cancellationToken?.throwIfCancelled();
 
     final paginatedMatches = matches.skip(offset).take(limit).toList();
 
@@ -110,7 +133,9 @@ class InMemorySearchProvider extends SearchProvider {
       totalCount: matches.length,
       executionTimeMs: stopwatch.elapsedMilliseconds,
       hasMore: offset + limit < matches.length,
-      nextPage: offset + limit < matches.length ? (offset + limit).toString() : null,
+      nextPage: offset + limit < matches.length
+          ? (offset + limit).toString()
+          : null,
     );
   }
 
@@ -123,7 +148,8 @@ class InMemorySearchProvider extends SearchProvider {
     final normalizedQuery = query.toLowerCase();
     final suggestions = _indexed
         .where((indexed) {
-          return indexed.normalizedTitle.startsWith(normalizedQuery) || indexed.normalizedSubtitle.startsWith(normalizedQuery);
+          return indexed.normalizedTitle.startsWith(normalizedQuery) ||
+              indexed.normalizedSubtitle.startsWith(normalizedQuery);
         })
         .map((e) => e.item)
         .take(5)
