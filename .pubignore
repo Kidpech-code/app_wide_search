@@ -1,0 +1,50 @@
+# Exclude audit and internal documentation files from pub.dev package
+AUDIT_*.md
+*_COMPLETE*.md
+*_SUMMARY*.md
+CONCEPT_COMPLIANCE.md
+DIFF_SUMMARY.md
+DOCS_CHECKLIST.md
+EXAMPLES_MATRIX.md
+FINAL_*.md
+GAP_LIST.md
+IMPLEMENTATION_*.md
+IOS_FIX.md
+MISSION_*.md
+OPTIMIZATION_*.md
+PERFORMANCE_COMPLETE.md
+PERFORMANCE_REPORT.md
+PERF_ASSERTIONS.md
+PLATFORM_MATRIX.md
+QUALITY_GATE_OUTPUT.txt
+RELEASE_INSTRUCTIONS.md
+RELEASE_READINESS.md
+RUNTIME_FIXES.md
+SUMMARY_TH.md
+TASKS_*.md
+TEST_MATRIX.md
+TODOS_*.md
+
+# Exclude example documentation that's not needed for users
+example/EXAMPLES_OVERVIEW.md
+example/EXAMPLES_ROADMAP.md
+example/QUICK_REFERENCE.md
+example/VIDEO_TUTORIAL_SCRIPT.md
+example/_shared/COMPLETE.md
+
+# Exclude coverage reports
+coverage/
+
+# Exclude build artifacts
+build/
+
+# Keep only essential files:
+# - README.md
+# - CHANGELOG.md
+# - LICENSE
+# - API.md (optional but useful)
+# - lib/
+# - example/ (minimal examples only)
+# - test/
+# - pubspec.yaml
+# - analysis_options.yaml

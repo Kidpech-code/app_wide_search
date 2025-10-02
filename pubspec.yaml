@@ -5,9 +5,26 @@ homepage: https://github.com/kidpech-code/app_wide_search
 repository: https://github.com/kidpech-code/app_wide_search
 issue_tracker: https://github.com/kidpech-code/app_wide_search/issues
 
+# Topics for pub.dev categorization
+topics:
+  - search
+  - ui
+  - widget
+  - navigation
+  - offline
+
+# Platform support (pure Dart - no native code)
+platforms:
+  android:
+  ios:
+  linux:
+  macos:
+  web:
+  windows:
+
 environment:
-  sdk: ^3.8.1
-  flutter: ">=3.16.0"
+  sdk: ^3.8.0
+  flutter: ">=3.24.0"
 
 dependencies:
   flutter:
