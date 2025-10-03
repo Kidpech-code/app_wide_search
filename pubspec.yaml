@@ -1,6 +1,6 @@
 name: app_wide_search
 description: A high-performance Flutter package for implementing app-wide search with grouped results, offline caching, and deep-link support.
-version: 0.1.0
+version: 0.1.1
 homepage: https://github.com/kidpech-code/app_wide_search
 repository: https://github.com/kidpech-code/app_wide_search
 issue_tracker: https://github.com/kidpech-code/app_wide_search/issues
@@ -29,8 +29,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_riverpod: ^2.6.0
-  riverpod_annotation: ^2.6.0
+  flutter_riverpod: ^3.0.1
+  riverpod: ^3.0.1
+  riverpod_annotation: ^3.0.1
   go_router: ^16.0.0
   hive: ^2.2.3
   hive_flutter: ^1.1.0
@@ -43,7 +44,7 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^6.0.0
   build_runner: ^2.4.8
-  riverpod_generator: ^2.6.0
+  riverpod_generator: ^3.0.1
   json_serializable: ^6.8.0
   path_provider_platform_interface: ^2.1.0
 

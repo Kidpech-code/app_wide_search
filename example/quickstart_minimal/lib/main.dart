@@ -36,7 +36,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Quickstart Minimal',
-      theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue), useMaterial3: true),
+      theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+          useMaterial3: true),
       home: const HomeScreen(),
     );
   }
@@ -68,11 +70,15 @@ class HomeScreen extends ConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.search, size: 100, color: Theme.of(context).colorScheme.primary),
+            Icon(Icons.search,
+                size: 100, color: Theme.of(context).colorScheme.primary),
             const SizedBox(height: 24),
-            Text('Tap the search icon', style: Theme.of(context).textTheme.headlineSmall),
+            Text('Tap the search icon',
+                style: Theme.of(context).textTheme.headlineSmall),
             const SizedBox(height: 8),
-            Text('Try searching for: iPhone, John, or Flutter', style: Theme.of(context).textTheme.bodyMedium, textAlign: TextAlign.center),
+            Text('Try searching for: iPhone, John, or Flutter',
+                style: Theme.of(context).textTheme.bodyMedium,
+                textAlign: TextAlign.center),
             const SizedBox(height: 48),
             ElevatedButton.icon(
               onPressed: () {
@@ -109,11 +115,26 @@ List<SearchItem> _createSampleData() {
       groupId: 'products',
       description: 'Powerful performance for developers',
     ),
-    SearchItem(id: '3', title: 'iPad Air', subtitle: 'Versatile tablet', groupId: 'products', description: 'Perfect for creativity'),
+    SearchItem(
+        id: '3',
+        title: 'iPad Air',
+        subtitle: 'Versatile tablet',
+        groupId: 'products',
+        description: 'Perfect for creativity'),
 
     // Contacts
-    SearchItem(id: '4', title: 'John Doe', subtitle: 'john@example.com', groupId: 'contacts', description: 'Software Engineer'),
-    SearchItem(id: '5', title: 'Jane Smith', subtitle: 'jane@example.com', groupId: 'contacts', description: 'Product Manager'),
+    SearchItem(
+        id: '4',
+        title: 'John Doe',
+        subtitle: 'john@example.com',
+        groupId: 'contacts',
+        description: 'Software Engineer'),
+    SearchItem(
+        id: '5',
+        title: 'Jane Smith',
+        subtitle: 'jane@example.com',
+        groupId: 'contacts',
+        description: 'Product Manager'),
 
     // Docs
     SearchItem(
@@ -123,6 +144,11 @@ List<SearchItem> _createSampleData() {
       groupId: 'docs',
       description: 'Guidelines for building quality apps',
     ),
-    SearchItem(id: '7', title: 'Riverpod Tutorial', subtitle: 'State management', groupId: 'docs', description: 'Complete guide to Riverpod'),
+    SearchItem(
+        id: '7',
+        title: 'Riverpod Tutorial',
+        subtitle: 'State management',
+        groupId: 'docs',
+        description: 'Complete guide to Riverpod'),
   ];
 }

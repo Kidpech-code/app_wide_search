@@ -1,0 +1,19 @@
+name: app_wide_search_example
+description: Quickstart example demonstrating app_wide_search integration.
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: ">=3.8.0 <4.0.0"
+  flutter: ">=3.24.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_riverpod: ^3.0.1
+  hive_flutter: ^1.1.0
+  app_wide_search:
+    path: ..
+
+flutter:
+  uses-material-design: true

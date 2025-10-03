@@ -143,7 +143,7 @@ app_wide_search/
 
 ```yaml
 dependencies:
-  app_wide_search: ^0.1.0
+  app_wide_search: ^0.1.1
   flutter_riverpod: ^2.5.1
   hive_flutter: ^1.1.0
   go_router: ^14.0.2

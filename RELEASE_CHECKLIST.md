@@ -330,7 +330,7 @@ High-performance Flutter package for implementing app-wide search with grouped r
 
 ```yaml
 dependencies:
-  app_wide_search: ^0.1.0
+  app_wide_search: ^0.1.1
 ```
 ````
 

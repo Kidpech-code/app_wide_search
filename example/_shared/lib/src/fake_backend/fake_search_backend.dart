@@ -65,7 +65,12 @@ class FakeSearchBackend {
   /// Returns a [SearchResult] after simulating network latency.
   /// May throw errors based on [errorRate].
   /// Supports cancellation via [cancellationToken].
-  Future<SearchResult> search(String query, {int page = 1, int? limit, CancellationToken? cancellationToken}) async {
+  Future<SearchResult> search(
+    String query, {
+    int page = 1,
+    int? limit,
+    CancellationToken? cancellationToken,
+  }) async {
     _searchCount++;
     final searchId = _searchCount;
 
@@ -105,7 +110,9 @@ class FakeSearchBackend {
     final startIndex = (page - 1) * effectiveLimit;
     final endIndex = min(startIndex + effectiveLimit, matches.length);
 
-    final paginatedItems = startIndex < matches.length ? matches.sublist(startIndex, endIndex) : <SearchItem>[];
+    final paginatedItems = startIndex < matches.length
+        ? matches.sublist(startIndex, endIndex)
+        : <SearchItem>[];
 
     final executionTime = DateTime.now().difference(startTime).inMilliseconds;
 
@@ -145,7 +152,11 @@ class FakeSearchBackend {
   ///
   /// Useful for demonstrating streaming search patterns.
   /// Emits partial results as they become available.
-  Stream<SearchResult> searchStream(String query, {int batchSize = 10, CancellationToken? cancellationToken}) async* {
+  Stream<SearchResult> searchStream(
+    String query, {
+    int batchSize = 10,
+    CancellationToken? cancellationToken,
+  }) async* {
     if (query.trim().isEmpty) {
       yield SearchResult.empty(query);
       return;
@@ -169,7 +180,12 @@ class FakeSearchBackend {
       }
 
       // Emit partial results
-      yield SearchResult(query: query, items: List.from(matches), totalCount: matches.length, hasMore: i + batchSize < _allItems.length);
+      yield SearchResult(
+        query: query,
+        items: List.from(matches),
+        totalCount: matches.length,
+        hasMore: i + batchSize < _allItems.length,
+      );
 
       // Simulate processing delay
       await Future<void>.delayed(const Duration(milliseconds: 10));

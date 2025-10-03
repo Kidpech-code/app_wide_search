@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod/legacy.dart' show StateController;
 import 'package:go_router/go_router.dart';
 import '../providers/search_providers.dart';
 import '../widgets/search_result_list.dart';
@@ -62,7 +63,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
     if (widget.initialQuery != null) {
       // Trigger search with initial query
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        ref.read(searchQueryProvider.notifier).state = widget.initialQuery!;
+        _setQuery(widget.initialQuery!);
       });
     }
   }
@@ -83,23 +84,26 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
 
     _debounce?.cancel();
     _debounce = Timer(widget.debounceDuration, () {
-      if (value.trim().isNotEmpty) {
-        ref.read(searchQueryProvider.notifier).state = value;
-      } else {
-        ref.read(searchQueryProvider.notifier).state = '';
-      }
+      _setQuery(value.trim().isNotEmpty ? value : '');
     });
   }
 
   void _onSearchSubmitted(String value) {
     _debounce?.cancel();
-    ref.read(searchQueryProvider.notifier).state = value;
+    _setQuery(value);
   }
 
   void _clearSearch() {
     _searchController.clear();
     _showClearButton.value = false;
-    ref.read(searchQueryProvider.notifier).state = '';
+    _setQuery('');
+  }
+
+  void _setQuery(String value) {
+    final StateController<String> controller = ref.read(
+      searchQueryProvider.notifier,
+    );
+    controller.state = value;
   }
 
   @override
@@ -215,7 +219,9 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                   ),
                   TextButton(
                     onPressed: () {
-                      final clearHistory = ref.read(clearSearchHistoryProvider);
+                      final void Function() clearHistory = ref.read(
+                        clearSearchHistoryProvider,
+                      );
                       clearHistory();
                     },
                     child: Text(SearchLocalizations.of(context).clearHistory),
@@ -234,7 +240,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                     trailing: const Icon(Icons.north_west),
                     onTap: () {
                       _searchController.text = query;
-                      ref.read(searchQueryProvider.notifier).state = query;
+                      _setQuery(query);
                     },
                   );
                 },

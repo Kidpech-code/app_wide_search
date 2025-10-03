@@ -66,7 +66,7 @@ Add `app_wide_search` to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  app_wide_search: ^0.1.0
+  app_wide_search: ^0.1.1
   flutter_riverpod: ^2.6.0
   hive_flutter: ^1.1.0
   go_router: ^16.0.0

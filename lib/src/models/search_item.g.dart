@@ -6,7 +6,12 @@ part of 'search_item.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
+/// Hive `TypeAdapter` for [SearchItem]. Stores searchable entries for in-app
+/// providers and offline caches.
 class SearchItemAdapter extends TypeAdapter<SearchItem> {
+  /// Creates a new [SearchItemAdapter] to link the adapter with Hive.
+  SearchItemAdapter();
+
   @override
   final int typeId = 0;
 

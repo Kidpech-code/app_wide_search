@@ -26,7 +26,7 @@ This example deliberately excludes advanced features to keep it simple:
 ### 1. Run the Example
 
 ```bash
-cd examples/quickstart_minimal
+cd example/quickstart_minimal
 flutter pub get
 flutter run
 ```
@@ -46,7 +46,7 @@ That's it! 🎉
 ```yaml
 # pubspec.yaml
 dependencies:
-  flutter_riverpod: ^2.6.0
+  flutter_riverpod: ^3.0.1
   app_wide_search:
     path: ../../ # Or use pub.dev version
 ```

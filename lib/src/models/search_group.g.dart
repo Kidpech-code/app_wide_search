@@ -6,7 +6,13 @@ part of 'search_group.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
+/// Hive `TypeAdapter` for [SearchGroup]. Serializes and deserializes groups
+/// for efficient offline caching and fast warm starts.
 class SearchGroupAdapter extends TypeAdapter<SearchGroup> {
+  /// Creates a new [SearchGroupAdapter] used to register the adapter with
+  /// Hive at application start.
+  SearchGroupAdapter();
+
   @override
   final int typeId = 1;
 

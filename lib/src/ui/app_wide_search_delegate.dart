@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod/legacy.dart' show StateController;
 import '../models/search_item.dart';
 import '../models/search_result.dart';
+import '../models/search_provider.dart';
 import '../providers/search_providers.dart';
 import '../widgets/search_result_list.dart';
 import '../l10n/search_localizations.dart';
@@ -68,7 +70,10 @@ class AppWideSearchDelegate extends SearchDelegate<SearchItem?> {
   Widget buildResults(BuildContext context) {
     // Update the query in the provider
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(searchQueryProvider.notifier).state = query;
+      final StateController<String> controller = ref.read(
+        searchQueryProvider.notifier,
+      );
+      controller.state = query;
     });
 
     return Consumer(
@@ -197,7 +202,7 @@ class AppWideSearchDelegate extends SearchDelegate<SearchItem?> {
   }
 
   void _handleItemSelection(SearchItem item) {
-    final searchProvider = ref.read(searchProviderProvider);
+    final SearchProvider searchProvider = ref.read(searchProviderProvider);
     searchProvider.onItemSelected(item);
   }
 }

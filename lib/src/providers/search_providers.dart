@@ -1,4 +1,5 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod/legacy.dart';
+import 'package:riverpod/riverpod.dart';
 import '../models/search_provider.dart';
 import '../models/search_result.dart';
 import '../repositories/search_history_repository.dart';
@@ -63,10 +64,12 @@ final searchQueryProvider = StateProvider.autoDispose<String>((ref) => '');
 final searchResultsProvider = FutureProvider.autoDispose<SearchResult>((
   ref,
 ) async {
-  final query = ref.watch(searchQueryProvider);
+  final (String rawQuery, String normalizedQuery) = ref.watch(
+    searchQueryProvider.select((String value) => (value, value.trim())),
+  );
 
-  if (query.trim().isEmpty) {
-    return SearchResult.empty(query);
+  if (normalizedQuery.isEmpty) {
+    return SearchResult.empty(rawQuery);
   }
 
   // Initialize repositories
@@ -77,20 +80,20 @@ final searchResultsProvider = FutureProvider.autoDispose<SearchResult>((
   await historyRepo.initialize();
 
   // Check cache first
-  final cachedResult = cacheRepo.getCachedResult(query);
+  final cachedResult = cacheRepo.getCachedResult(normalizedQuery);
   if (cachedResult != null) {
     return cachedResult;
   }
 
   // Perform search
   final searchProvider = ref.watch(searchProviderProvider);
-  final result = await searchProvider.search(query);
+  final result = await searchProvider.search(normalizedQuery);
 
   // Cache the result
   await cacheRepo.cacheResult(result);
 
   // Add to history
-  await historyRepo.addToHistory(query);
+  await historyRepo.addToHistory(normalizedQuery);
 
   return result;
 });

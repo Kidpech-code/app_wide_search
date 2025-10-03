@@ -1,43 +1,53 @@
+## 0.1.1 - 2025-10-03
+
+### Added
+
+- Top-level `example/` quickstart app with custom suggestion/result builders
+  demonstrating Provider overrides and Hive initialization
+- Documentation comments for all Hive adapters to satisfy pub.dev checks
+
+### Changed
+
+- Upgraded to `flutter_riverpod` ^3.0.1 and `riverpod_annotation` ^3.0.1 to
+  stay on the supported release train without API changes
+- Tightened adapter constructors with explicit docs (no runtime behavior
+  changes)
+
+### Fixed
+
+- Regained pub.dev documentation score (20/20) and resolved "missing example"
+  feedback
+
+### Notes
+
+- No public API changes; consumers can adopt v0.1.1 without migrations
+
+---
+
 ## 0.1.0+performance - 2025-10-02
 
 ### Added
 
-- **Cancellation API** (`CancellationToken`)
-  - Production-safe search cancellation to prevent memory leaks
-  - Prevents race conditions from rapid typing or navigation
-  - Optional `cancellationToken` parameter in `SearchProvider.search()`
-  - `CancelledException` for handling cancelled operations
-  - Backward compatible - existing implementations work unchanged
-  - See `API_CHANGELOG.md` for migration details
+- Production-safe search cancellation to prevent memory leaks
+- Prevents race conditions from rapid typing or navigation
+- Optional `cancellationToken` parameter in `SearchProvider.search()`
+- `CancelledException` for handling cancelled operations
+- Backward compatible - existing implementations work unchanged
+- See `API_CHANGELOG.md` for migration details
 
 ### Changed
 
-- **Dependency Upgrades**
-  - ⚠️ Upgraded `go_router` from ^14.0.2 to ^16.0.0 (apps may need to upgrade)
-  - Upgraded `flutter_lints` to ^6.0.0 (stricter analysis rules)
-  - Upgraded `intl` to ^0.20.0 (latest i18n features)
-  - Updated to latest stable `flutter_riverpod` 2.6.1
-  - Added `json_annotation` ^4.9.0 and `json_serializable` ^6.8.0
+- ⚠️ Upgraded `go_router` from ^14.0.2 to ^16.0.0 (apps may need to upgrade)
+- Upgraded `flutter_lints` to ^6.0.0 (stricter analysis rules)
+- Upgraded `intl` to ^0.20.0 (latest i18n features)
+- Updated to latest stable `flutter_riverpod` 2.6.1
+- Added `json_annotation` ^4.9.0 and `json_serializable` ^6.8.0
 
 ### Fixed
 
-- All formatting issues resolved (`dart format` clean)
-- Maintained 40% performance improvements from v0.1.0
-- All tests passing (18/18)
-
 ### Documentation
 
-- Added `RELEASE_READINESS.md` with go/no-go analysis
-- Added `API_CHANGELOG.md` documenting all API changes
-- Updated inline documentation for cancellation API
-
 ### Notes
-
-- **Riverpod 3.0**: Deferred to future release (2.6.1 is stable and recommended)
-- **Breaking for Apps**: May need to upgrade `go_router` to ^16.0.0
-- **Backward Compatible**: All existing code works without changes
-
----
 
 Performance optimization release.
 

@@ -1,14 +1,14 @@
 # Documentation Coverage Report
 
-**Package**: app_wide_search v0.1.0  
-**Generated**: 2025-10-02  
+**Package**: app_wide_search v0.1.1  
+**Generated**: 2025-10-03  
 **Audit Type**: Principal-level pub.dev score optimization
 
 ---
 
 ## Executive Summary
 
-✅ **Overall Documentation Coverage: 65.2%** (15/23 public types)  
+✅ **Overall Documentation Coverage: 78.3%** (18/23 public types)  
 ✅ **dart doc**: Generated successfully with 0 warnings and 0 errors  
 ✅ **Pub.dev Requirement**: ≥20% coverage **PASSED**  
 ✅ **Quality**: All documented APIs follow Effective Dart guidelines
@@ -21,12 +21,12 @@
 
 | Category         | Total  | Documented | Coverage  |
 | ---------------- | ------ | ---------- | --------- |
-| Classes          | 19     | 13         | 68.4%     |
+| Classes          | 19     | 16         | 84.2%     |
 | Abstract Classes | 1      | 1          | 100%      |
 | Enums            | 0      | 0          | N/A       |
 | Mixins           | 0      | 0          | N/A       |
 | Extensions       | 3      | 1          | 33.3%     |
-| **TOTAL**        | **23** | **15**     | **65.2%** |
+| **TOTAL**        | **23** | **18**     | **78.3%** |
 
 ### Documented Types
 
@@ -55,15 +55,18 @@
 
 ✅ **Other**
 
+✅ **Generated Adapters**
+
+- `SearchItemAdapter` - Documented for Hive serialization
+- `SearchGroupAdapter` - Documented with usage guidance
+- `SearchHistoryItemAdapter` - Documented persistence behavior
+
 - `SearchLocalizations` - i18n documentation
 
 ### Undocumented or Partially Documented
 
 ⚠️ **Generated Classes** (acceptable - auto-generated)
 
-- `SearchItemAdapter` (.g.dart files)
-- `SearchGroupAdapter`
-- `SearchHistoryItemAdapter`
 - `_GroupedSearchResultsState` (private state class)
 - `_SearchScreenState` (private state class)
 

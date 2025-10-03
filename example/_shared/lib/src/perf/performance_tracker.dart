@@ -19,7 +19,12 @@ class PerformanceTracker {
   int _cacheMisses = 0;
 
   /// Records a search operation.
-  void recordSearch({required String query, required int resultCount, required Duration executionTime, bool fromCache = false}) {
+  void recordSearch({
+    required String query,
+    required int resultCount,
+    required Duration executionTime,
+    bool fromCache = false,
+  }) {
     if (!enabled) return;
 
     if (fromCache) {
@@ -29,7 +34,13 @@ class PerformanceTracker {
     }
 
     _metrics.add(
-      PerformanceMetric(query: query, resultCount: resultCount, executionTime: executionTime, fromCache: fromCache, timestamp: DateTime.now()),
+      PerformanceMetric(
+        query: query,
+        resultCount: resultCount,
+        executionTime: executionTime,
+        fromCache: fromCache,
+        timestamp: DateTime.now(),
+      ),
     );
 
     // Keep only last 100 metrics
@@ -53,7 +64,12 @@ class PerformanceTracker {
     final result = await operation();
     stopwatch.stop();
 
-    recordSearch(query: query, resultCount: getResultCount(result), executionTime: stopwatch.elapsed, fromCache: fromCache);
+    recordSearch(
+      query: query,
+      resultCount: getResultCount(result),
+      executionTime: stopwatch.elapsed,
+      fromCache: fromCache,
+    );
 
     return result;
   }
@@ -62,7 +78,10 @@ class PerformanceTracker {
   Duration get averageExecutionTime {
     if (_metrics.isEmpty) return Duration.zero;
 
-    final total = _metrics.fold<int>(0, (sum, metric) => sum + metric.executionTime.inMicroseconds);
+    final total = _metrics.fold<int>(
+      0,
+      (sum, metric) => sum + metric.executionTime.inMicroseconds,
+    );
 
     return Duration(microseconds: total ~/ _metrics.length);
   }
@@ -72,7 +91,10 @@ class PerformanceTracker {
     final cachedMetrics = _metrics.where((m) => m.fromCache).toList();
     if (cachedMetrics.isEmpty) return Duration.zero;
 
-    final total = cachedMetrics.fold<int>(0, (sum, metric) => sum + metric.executionTime.inMicroseconds);
+    final total = cachedMetrics.fold<int>(
+      0,
+      (sum, metric) => sum + metric.executionTime.inMicroseconds,
+    );
 
     return Duration(microseconds: total ~/ cachedMetrics.length);
   }
@@ -82,7 +104,10 @@ class PerformanceTracker {
     final uncachedMetrics = _metrics.where((m) => !m.fromCache).toList();
     if (uncachedMetrics.isEmpty) return Duration.zero;
 
-    final total = uncachedMetrics.fold<int>(0, (sum, metric) => sum + metric.executionTime.inMicroseconds);
+    final total = uncachedMetrics.fold<int>(
+      0,
+      (sum, metric) => sum + metric.executionTime.inMicroseconds,
+    );
 
     return Duration(microseconds: total ~/ uncachedMetrics.length);
   }
@@ -91,7 +116,8 @@ class PerformanceTracker {
   Duration get p95ExecutionTime {
     if (_metrics.isEmpty) return Duration.zero;
 
-    final sorted = _metrics.map((m) => m.executionTime).toList()..sort((a, b) => a.inMicroseconds.compareTo(b.inMicroseconds));
+    final sorted = _metrics.map((m) => m.executionTime).toList()
+      ..sort((a, b) => a.inMicroseconds.compareTo(b.inMicroseconds));
 
     final index = (sorted.length * 0.95).floor();
     return sorted[index.clamp(0, sorted.length - 1)];
@@ -151,8 +177,12 @@ class PerformanceTracker {
     debugPrint('Cache Hit Rate:    ${cacheHitRate.toStringAsFixed(1)}%');
     debugPrint('───────────────────────────────────────────');
     debugPrint('Average Time:      ${averageExecutionTime.inMilliseconds}ms');
-    debugPrint('Cached Avg:        ${averageCachedExecutionTime.inMilliseconds}ms');
-    debugPrint('Uncached Avg:      ${averageUncachedExecutionTime.inMilliseconds}ms');
+    debugPrint(
+      'Cached Avg:        ${averageCachedExecutionTime.inMilliseconds}ms',
+    );
+    debugPrint(
+      'Uncached Avg:      ${averageUncachedExecutionTime.inMilliseconds}ms',
+    );
     debugPrint('P95 Time:          ${p95ExecutionTime.inMilliseconds}ms');
     debugPrint('═══════════════════════════════════════════\n');
   }

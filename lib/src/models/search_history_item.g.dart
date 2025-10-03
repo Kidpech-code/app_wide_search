@@ -6,7 +6,12 @@ part of 'search_history_item.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
+/// Hive `TypeAdapter` for [SearchHistoryItem]. Persists recent queries so they
+/// can be surfaced instantly on subsequent launches.
 class SearchHistoryItemAdapter extends TypeAdapter<SearchHistoryItem> {
+  /// Creates a new [SearchHistoryItemAdapter] for registering with Hive.
+  SearchHistoryItemAdapter();
+
   @override
   final int typeId = 2;
 
