@@ -27,6 +27,34 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
+      - name: "Guard: no flutter_test in lib/"
+        run: |
+          if grep -R --binary-files=without-match --exclude-dir=build --exclude-dir=.dart_tool "package:flutter_test" lib/; then
+            echo "Found flutter_test import under lib/. Move test helpers to dev-only scope.";
+            exit 1;
+          fi
+
+      - name: "Guard: no package:test in lib/"
+        run: |
+          if grep -R --binary-files=without-match --exclude-dir=build --exclude-dir=.dart_tool "package:test/" lib/; then
+            echo "Found package:test import under lib/. Ensure test utilities stay outside public API.";
+            exit 1;
+          fi
+
+      - name: "Guard: no dart:io in lib/"
+        run: |
+          if grep -R --binary-files=without-match --exclude-dir=build --exclude-dir=.dart_tool "dart:io" lib/; then
+            echo "Found dart:io usage under lib/. Gate IO access behind conditional imports.";
+            exit 1;
+          fi
+
+      - name: "Guard: no dart:io in example/"
+        run: |
+          if grep -R --binary-files=without-match --exclude-dir=build --exclude-dir=.dart_tool "dart:io" example/; then
+            echo "Found dart:io usage under example/. Remove IO dependencies for Web/WASM compatibility.";
+            exit 1;
+          fi
+
       - name: Verify formatting
         run: dart format --set-exit-if-changed .
 
@@ -130,7 +158,7 @@ jobs:
       - name: Build example app (Web)
         if: matrix.target == 'web'
         working-directory: example
-        run: flutter build web --release
+        run: flutter build web --wasm --no-tree-shake-icons --release
 
       - name: Build example app (iOS)
         if: matrix.target == 'ios'
