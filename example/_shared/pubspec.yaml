@@ -12,7 +12,7 @@ dependencies:
     sdk: flutter
   app_wide_search:
     path: ../../
-  flutter_riverpod: ^2.6.0
+  flutter_riverpod: ^3.4.3
   faker: ^2.1.0
 
 dev_dependencies:

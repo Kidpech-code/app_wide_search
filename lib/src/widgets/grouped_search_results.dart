@@ -15,6 +15,7 @@ class GroupedSearchResults extends StatefulWidget {
     required this.onItemTap,
     this.groups,
     this.itemBuilder,
+    this.groupIconBuilder,
     this.initiallyExpanded = true,
     super.key,
   });
@@ -30,6 +31,13 @@ class GroupedSearchResults extends StatefulWidget {
 
   /// Custom builder for individual items.
   final Widget Function(BuildContext, SearchItem)? itemBuilder;
+
+  /// Builds a group icon from statically declared icons such as `Icons.folder`.
+  ///
+  /// Return null to use the group-colored folder fallback. Serialized
+  /// [SearchGroup.icon] code points are metadata; they are not rendered directly
+  /// because dynamic IconData prevents release icon tree shaking.
+  final Widget? Function(BuildContext, SearchGroup)? groupIconBuilder;
 
   /// Whether groups should be initially expanded.
   final bool initiallyExpanded;
@@ -94,9 +102,11 @@ class _GroupedSearchResultsState extends State<GroupedSearchResults> {
             _expandedStates[groupId] = expanded;
           });
         },
-        leading: group?.icon != null
-            ? Icon(IconData(group!.icon!, fontFamily: 'MaterialIcons'))
-            : Icon(Icons.folder, color: groupColor),
+        leading:
+            (group == null
+                ? null
+                : widget.groupIconBuilder?.call(context, group)) ??
+            Icon(Icons.folder, color: groupColor),
         title: Text(
           group?.name ?? groupId,
           style: theme.textTheme.titleMedium?.copyWith(

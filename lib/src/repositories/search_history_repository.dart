@@ -1,4 +1,4 @@
-import 'package:hive/hive.dart';
+import 'package:hive_ce/hive.dart';
 import '../models/search_history_item.dart';
 
 /// Repository for managing search history using Hive.

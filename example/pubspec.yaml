@@ -10,8 +10,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_riverpod: ^3.0.1
-  hive_flutter: ^1.1.0
+  cupertino_icons: ^1.0.8
+  flutter_riverpod: ^3.4.3
+  hive_ce_flutter: ^2.3.4
   app_wide_search:
     path: ..
 
