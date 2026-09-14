@@ -1,4 +1,4 @@
-## 0.2.0 - Unreleased
+## 0.2.0 - 2026-09-14
 
 ### Breaking changes
 - Use Hive CE instead of Hive 2 for functional WASM persistence. Applications
