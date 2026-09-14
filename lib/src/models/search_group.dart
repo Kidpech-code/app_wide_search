@@ -1,4 +1,4 @@
-import 'package:hive/hive.dart';
+import 'package:hive_ce/hive.dart';
 
 part 'search_group.g.dart';
 
@@ -30,7 +30,10 @@ class SearchGroup extends HiveObject {
   @HiveField(2)
   final String? description;
 
-  /// Optional icon data for the group.
+  /// Optional serialized icon code point retained for cache compatibility.
+  ///
+  /// Resolve this metadata to a constant icon through
+  /// `GroupedSearchResults.groupIconBuilder`; it is not rendered automatically.
   @HiveField(3)
   final int? icon;
 

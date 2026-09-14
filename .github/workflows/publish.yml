@@ -24,12 +24,15 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: "3.24.5"
+          flutter-version: "3.44.2"
           channel: "stable"
           cache: true
 
       - name: Install dependencies
-        run: flutter pub get
+        run: |
+          flutter pub get
+          (cd example/_shared && flutter pub get)
+          (cd example/quickstart_minimal && flutter pub get)
 
       - name: Format check
         run: dart format --set-exit-if-changed .
@@ -57,7 +60,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: "3.24.5"
+          flutter-version: "3.44.2"
           channel: "stable"
           cache: true
 

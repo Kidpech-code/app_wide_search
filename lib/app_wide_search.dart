@@ -13,7 +13,7 @@
 /// First, initialize Hive and register adapters:
 ///
 /// ```dart
-/// import 'package:hive_flutter/hive_flutter.dart';
+/// import 'package:hive_ce_flutter/hive_flutter.dart';
 /// import 'package:app_wide_search/app_wide_search.dart';
 ///
 /// void main() async {

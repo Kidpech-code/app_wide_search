@@ -1,3 +1,7 @@
+> **Upgrading to 0.2.0:** Read [MIGRATION.md](MIGRATION.md). Storage now uses Hive CE
+> for working browser WASM persistence. Custom group icons use `groupIconBuilder`;
+> saved integer icon values are preserved as metadata but no longer rendered directly.
+
 # App-Wide Search
 
 A high-performance Flutter package for implementing app-wide search with grouped results, offline caching, and deep-link support.
@@ -66,9 +70,9 @@ Add `app_wide_search` to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  app_wide_search: ^0.1.1
-  flutter_riverpod: ^2.6.0
-  hive_flutter: ^1.1.0
+  app_wide_search: ^0.2.0
+  flutter_riverpod: ^3.4.3
+  hive_ce_flutter: ^2.3.4
   go_router: ^16.0.0
 ```
 
@@ -84,7 +88,7 @@ flutter pub get
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive_ce_flutter/hive_flutter.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() async {
@@ -235,14 +239,14 @@ final groups = {
     id: 'products',
     name: 'Products',
     icon: Icons.shopping_bag.codePoint,
-    color: Colors.blue.value,
+    color: Colors.blue.toARGB32(),
     priority: 100,
   ),
   'documents': SearchGroup(
     id: 'documents',
     name: 'Documents',
     icon: Icons.description.codePoint,
-    color: Colors.green.value,
+    color: Colors.green.toARGB32(),
     priority: 90,
   ),
 };
@@ -254,6 +258,11 @@ AppWideSearchDelegate(
     return GroupedSearchResults(
       result: result,
       groups: groups,
+      groupIconBuilder: (context, group) => switch (group.id) {
+        'products' => const Icon(Icons.shopping_bag),
+        'documents' => const Icon(Icons.description),
+        _ => null,
+      },
       initiallyExpanded: true,
       onItemTap: (item) {
         // Handle tap

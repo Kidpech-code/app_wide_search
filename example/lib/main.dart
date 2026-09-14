@@ -1,7 +1,7 @@
 import 'package:app_wide_search/app_wide_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive_ce_flutter/hive_flutter.dart';
 
 /// Entry point for the app_wide_search quickstart example.
 Future<void> main() async {

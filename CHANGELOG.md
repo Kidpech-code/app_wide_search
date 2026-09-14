@@ -1,3 +1,21 @@
+## 0.2.0 - 2026-09-14
+
+### Breaking changes
+- Use Hive CE instead of Hive 2 for functional WASM persistence. Applications
+  initializing Hive or registering adapters must migrate their Hive imports.
+  Existing box names, type IDs, and field IDs are unchanged.
+- Render custom group icons through `groupIconBuilder`. Integer icon metadata
+  is preserved, but unmapped icons now use the group-colored folder fallback.
+- Require Flutter >=3.32.0; Dart remains >=3.8.0.
+
+### Fixed
+- Remove dynamic IconData construction that blocked release icon tree shaking.
+- Remove unused Riverpod annotation/generator and JSON generation dependencies,
+  allowing current Riverpod 3 releases to resolve.
+- Allow GoRouter 16.x through 18.x; locally verified with 17.5.0 and 18.0.1.
+- Update example imports and CI SDK; add browser persistence and legacy Hive
+  compatibility regression tests. See MIGRATION.md for upgrade instructions.
+
 ## 0.1.1 - 2025-10-03
 
 ### Added
